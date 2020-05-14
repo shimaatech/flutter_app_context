@@ -88,3 +88,19 @@ abstract class FactoryBeanConfig<S, T extends S> extends BeanConfig<S, T> {
 }
 
 
+
+class StaticContextHolder {
+  static AppContext _context;
+
+  static void setContext(AppContext context) {
+    _context = context;
+  }
+
+  static T locate<T>([String name]) => _context.locate<T>(name);
+
+  static Future<void> configure() => _context.configure();
+
+  static bool get devMode => _context.devMode;
+}
+
+
