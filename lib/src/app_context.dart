@@ -4,16 +4,22 @@ import 'locator/locator.dart';
 
 abstract class AppContext {
 
+  final bool devMode;
+
   Locator _locator;
 
-  AppContext() {
+  AppContext({this.devMode = false}) {
     _locator = setupLocator();
   }
 
   @protected
   Locator get locator => _locator;
 
-  List<BeanConfig> get configs;
+  List<BeanConfig> get beans => [];
+
+  List<BeanConfig> get devBeans => [];
+
+  List<BeanConfig> get configs => devMode ? beans + devBeans : beans;
 
   @protected
   Locator setupLocator() {
@@ -37,7 +43,7 @@ abstract class AppContext {
     locator.clear();
   }
 
-  bool get overrideOnConflict => false;
+  bool get overrideOnConflict => true;
 
 }
 
