@@ -106,11 +106,11 @@ class StaticContextHolder {
 
 
 
-abstract class AppStarter {
+abstract class MaterialAppStarter {
 
   final AppContext context;
 
-  AppStarter(this.context);
+  MaterialAppStarter(this.context);
 
   void start(AppContext context) async {
     StaticContextHolder.setContext(context);
