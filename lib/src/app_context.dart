@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'locator/locator.dart';
 
@@ -103,4 +104,25 @@ class StaticContextHolder {
   static bool get devMode => _context.devMode;
 }
 
+
+
+abstract class MaterialAppStarter {
+
+  final AppContext context;
+
+  MaterialAppStarter(this.context);
+
+  void start(AppContext context) async {
+    StaticContextHolder.setContext(context);
+    await _setup();
+    runApp(createApp());
+  }
+
+  Future<void> _setup() async {
+    await StaticContextHolder.configure();
+  }
+
+  MaterialApp createApp();
+
+}
 
